@@ -22,9 +22,11 @@ exports.checkRole = role => (req, res, next) => {
   if (user && user[namespace + 'role'] === role) {
     next();
   } else {
-    return res.status(401).send({
-      title: 'Not Authorized',
-      detail: 'You are not authorized to access this data'
-    });
+    return res
+      .status(401)
+      .send({
+        title: 'Not Authorized',
+        detail: 'You are not authorized to access this data'
+      });
   }
 };
