@@ -2,7 +2,6 @@ import React from 'react';
 import BaseLayout from '../components/layouts/BaseLayout';
 
 class SuperComponent extends React.Component {
-
   constructor(props) {
     super(props);
 
@@ -18,7 +17,7 @@ class SuperComponent extends React.Component {
       <BaseLayout>
         <h1> I am Blogs Page </h1>
       </BaseLayout>
-    )
+    );
   }
 }
 
