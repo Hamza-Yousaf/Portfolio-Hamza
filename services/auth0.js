@@ -5,12 +5,14 @@ import axios from 'axios';
 
 import { getCookieFromReq } from '../helpers/utils';
 
+const CLIENT_ID = process.env.CLIENT_ID;
+
 class Auth0 {
   constructor() {
     this.auth0 = new auth0.WebAuth({
       domain: 'dev-yljvl0l6.auth0.com',
-      clientID: 'bqMfoSxuZUX0rYE2boLZAzDIP3a99Z03',
-      redirectUri: 'http://localhost:3000/callback',
+      clientID: CLIENT_ID,
+      redirectUri: `${process.env.BASE_URL}/callback`,
       responseType: 'token id_token',
       scope: 'openid profile'
     });
@@ -35,26 +37,19 @@ class Auth0 {
   }
 
   setSession(authResult) {
-    // Set the time that the Access Token will expire at
     const expiresAt = JSON.stringify(
       authResult.expiresIn * 1000 + new Date().getTime()
     );
 
-    // localStorage.setItem('access_token', authResult.accessToken);
-
-    Cookies.set('user', authResult.idTokenPayload);
     Cookies.set('jwt', authResult.idToken);
-    Cookies.set('expiresAt', expiresAt);
   }
 
   logout() {
-    Cookies.remove('user');
     Cookies.remove('jwt');
-    Cookies.remove('expiresAt');
 
     this.auth0.logout({
-      returnTo: '',
-      clientID: 'bqMfoSxuZUX0rYE2boLZAzDIP3a99Z03'
+      returnTo: process.env.BASE_URL,
+      clientID: CLIENT_ID
     });
   }
 
@@ -73,6 +68,11 @@ class Auth0 {
   async verifyToken(token) {
     if (token) {
       const decodedToken = jwt.decode(token, { complete: true });
+
+      if (!decodedToken) {
+        return undefined;
+      }
+
       const jwks = await this.getJWKS();
       const jwk = jwks.keys[0];
 
