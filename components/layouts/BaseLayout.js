@@ -21,7 +21,7 @@ const BaseLayout = (props) => {
         {cannonical && <link rel="cannonical" href={`${process.env.BASE_URL}${cannonical}`}/>}
         <link rel="icon" type="image/ico" href="/static/favicon.ico"/>
       </Head>
-      <div className="layout-container" >
+      <div className="layout-container">
         <Header className={`port-nav-${headerType}`}
                 isAuthenticated={isAuthenticated}
                 user={user}

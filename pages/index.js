@@ -52,10 +52,7 @@ class Index extends React.Component {
         headerType="index"
         title="Hamza Yousaf - Portfolio"
       >
-        <div className="main-section">
-          <div className="background-image">
-            <img src="/static/images/background-index.png" />
-          </div>
+        <div className="main-section index-wrap">
           <Container>
             <Row>
               <Col md="6">

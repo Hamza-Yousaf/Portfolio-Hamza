@@ -12,7 +12,8 @@
 @import './header';
 @import './slate-editor';
 
-html, body {
+html,
+body {
   height: 100%;
   width: 100%;
   font-family: 'Montserrat', 'Helvetica';
@@ -52,4 +53,9 @@ html, body {
       margin-bottom: 20px;
     }
   }
+}
+
+.index-wrap {
+  min-height: 100vh;
+  min-width: 100wv;
 }
